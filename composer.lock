@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "5c6026b96e6fa11a641b51a6ba976f5e",
-    "content-hash": "5bd58fd976f1ee3e9611bc37c006ec46",
+    "hash": "d8a3b167189ccc4269697f5b6ef4ba31",
+    "content-hash": "fa9de9cdd794a3f7429901da50258971",
     "packages": [
         {
             "name": "classpreloader/classpreloader",
@@ -895,6 +895,50 @@
                 "shell"
             ],
             "time": "2015-07-16 15:26:57"
+        },
+        {
+            "name": "riari/laravel-forum",
+            "version": "2.4.7",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Riari/laravel-forum.git",
+                "reference": "916c3af6c505fa43ef8ca2f5465a75d96c266172"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Riari/laravel-forum/zipball/916c3af6c505fa43ef8ca2f5465a75d96c266172",
+                "reference": "916c3af6c505fa43ef8ca2f5465a75d96c266172",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "~5.0",
+                "php": ">=5.4.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Riari\\Forum\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Riari",
+                    "email": "hello@ricko.me"
+                }
+            ],
+            "description": "A complete forum package designed for easy integration into any Laravel 4/5 application",
+            "keywords": [
+                "discuss",
+                "forum",
+                "laravel",
+                "laravel-4",
+                "laravel-5"
+            ],
+            "time": "2015-09-21 19:17:37"
         },
         {
             "name": "swiftmailer/swiftmailer",
