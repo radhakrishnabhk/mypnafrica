@@ -145,6 +145,7 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 		Riari\Forum\ForumServiceProvider::class,
+		Bernardino\EasyAuthenticator\EasyAuthenticatorServiceProvider::class,
 
     ],
 
