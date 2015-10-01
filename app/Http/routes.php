@@ -12,5 +12,7 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('palavar_categories');
 });
+
+Route::get('categories','ForumController@getViewCategory');

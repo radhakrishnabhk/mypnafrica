@@ -5,5 +5,49 @@
 /* Feel free to override methods here to fit your requirements */
 class ForumController extends \Riari\Forum\Controllers\BaseController
 {
+	
+	
+	public function getViewCategory($categoryID=1, $categoryAlias='category')
+    {
+        $this->load(['category' => $categoryID], ['parentCategory', 'subCategories']);
+
+        return $this->makeView('palavar_categories');
+    }
+	
+	 public function postCreateThread($categoryID=1, $categoryAlias='category')
+    {
+        $user = Utils::getCurrentUser();
+
+        $this->load(['category' => $categoryID]);
+
+        $thread_valid = Validation::check('thread');
+        $post_valid = Validation::check('post');
+        if ($thread_valid && $post_valid)
+        {
+            $thread = array(
+                'author_id'       => $user->id,
+                'parent_category' => $categoryID,
+                'title'           => Input::get('title')
+            );
+
+            $thread = $this->threads->create($thread);
+
+            $post = array(
+                'parent_thread'   => $thread->id,
+                'author_id'       => $user->id,
+                'content'         => Input::get('content')
+            );
+
+            $this->posts->create($post);
+
+            Alerts::add('success', trans('forum::base.thread_created'));
+
+            return Redirect::to($thread->route);
+        }
+        else
+        {
+            return Redirect::to($this->collections['category']->newThreadRoute)->withInput();
+        }
+    }
 
 }
