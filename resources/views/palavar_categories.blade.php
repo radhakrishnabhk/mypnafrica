@@ -1,19 +1,25 @@
 @extends('master')
 @section('content')
-
+    <?php
+	
+    $encrypter = app('Illuminate\Encryption\Encrypter');
+    $encrypted_token = $encrypter->encrypt(csrf_token());
+ 
+	
+	?>
 	<section class="scrollable wrapper">
         <div class="row">
           <div class="col-lg-8">
             <div class="panel panel-default">
   <div class="panel-heading">
  
-      <div class="container">
+      <div class="">
 	<div class="row">
-    <div class="col-md-11">
+    <div class="col-md-2">
     <a href="#"><span class="fa fa-smile-o fa-3x"></span></a><!--<i class="fa fa-smile-o fa-4x"></i> -->
 
     </div>
-        <div class="col-md-6">
+        <div class="col-md-7">
     		
             <div id="custom-search-input">
             
@@ -28,8 +34,8 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-4">
-           <input type="button" class="btn btn-default btn-lg" value="Or Say Something">
+        <div class="col-md-3 pull-right">
+           <input type="button" class="btn btn-default btn-lg" id="saysomehing" value="Or Say Something">
         </div>
 	</div>
 </div>
@@ -65,7 +71,7 @@
   <p>Total Posts : 5</p>
   </div><!--col-md-3-->
   <div class="col-md-3 pull-right">
-  <button type="button" class="btn btn-info" id="adpst"><i class="fa fa-plus-square"></i> ADD NEW POST</button>
+  <a href="addnewpost.html"><button type="button" class="btn btn-info" id="adpst"><i class="fa fa-plus-square"></i> ADD NEW POST</button></a>
    
   </div><!--col-md-5-->
   </div><!--/row-->
@@ -78,244 +84,30 @@
   <li><a href="#">Menu 2</a></li>
   <li><a href="#">Menu 3</a></li>
 </ul>
-</div> --><!--/col-md-12-->
-  </div><!--/row-->
-  <br>
-  <!--<div class="row">
-  <div class="col-md-1">
-  <img src="images/default_category.png" class="img-responsive" alt="jokes" style="background:#fbfbfb none repeat scroll 0 0;border:1px solid #dfdfdf;border-radius:50%;">
+</div><!--/col-md-12--
+  </div> --><!--/row-->
   
-  </div><!--/col-md-11--
-  <div class="col-md-6">
-   <a href="#"><h4>Jokes</h4></a>
-   <p>5 Discussions</p>
-   </div><!--/col-md-3--
-   </div> --><!--/row-->
-    <br>
-   <!--<div class="row">
-  <div class="col-md-1">
-  <img src="images/default_category.png" class="img-responsive" alt="jokes" style="background:#fbfbfb none repeat scroll 0 0;border:1px solid #dfdfdf;border-radius:50%;">
-  
-  </div><!--/col-md-11--
-  <div class="col-md-6">
-   <a href="#"><h4>Health</h4></a>
-   <p>0 Discussions</p>
-   </div><!--/col-md-3--
-   </div> --><!--/row-->
-    <br>
-  <!-- <div class="row">
-  <div class="col-md-1">
-  <img src="images/default_category.png" class="img-responsive" alt="jokes" style="background:#fbfbfb none repeat scroll 0 0;border:1px solid #dfdfdf;border-radius:50%;">
-  
-  </div><!--/col-md-11--
-  <div class="col-md-6">
-   <a href="#"><h4>Politics</h4></a>
-   <p>2 Discussions</p>
-   </div><!--/col-md-3--
-   </div><--/row-->
-    <br>
-   <div class="row">
-  <div class="col-md-1">
-  <img src="images/default_category.png" class="img-responsive" alt="jokes" style="background:#fbfbfb none repeat scroll 0 0;border:1px solid #dfdfdf;border-radius:50%;">
-  
-  </div><!--/col-md-11-->
   @foreach ($category->subcategories as $subcategory)
-  <div class="col-md-6">
-   <a href="#"><h4>{{ $subcategory->subtitle }}</h4></a>
-   <p>2 Discussions</p>
+  <div class="row">
+  <div class="col-md-1 col-xs-2 col-sm-1 col-lg-1">
+  <img src="images/default_category.png" class="img-responsive" alt="jokes" style="background:#fbfbfb none repeat scroll 0 0;*border:1px solid #dfdfdf;">
+  
+  </div><!--/col-md-11-->
+  <div class="col-md-6 col-lg-6 col-sm-6 col-xs-6">
+   <a href="palaver-categories.html"><h4>{{ $subcategory->title }}</h4></a>
+   <p>{{ $subcategory->threadCount }} Discussions</p>
+   <p>{{ $subcategory->postCount }} Posts</p>
    </div><!--/col-md-3-->
    </div><!--/row-->
     <br>
-   <div class="row">
-  <div class="col-md-1">
-  <img src="images/default_category.png" class="img-responsive" alt="jokes" style="background:#fbfbfb none repeat scroll 0 0;border:1px solid #dfdfdf;border-radius:50%;">
-  
-  </div><!--/col-md-11-->
-  
-  
-  @endforeach
-  <div class="col-md-6">
-   <a href="#"><h4>Entertainment</h4></a>
-   <p>2 Discussions</p>
-   </div><!--/col-md-3-->
-   </div><!--/row-->
-    <br>
-   <div class="row">
-  <div class="col-md-1">
-  <img src="images/default_category.png" class="img-responsive" alt="jokes" style="background:#fbfbfb none repeat scroll 0 0;border:1px solid #dfdfdf;border-radius:50%;">
-  
-  </div><!--/col-md-11-->
-  <div class="col-md-6">
-   <a href="#"><h4>Cities & Places</h4></a>
-   <p>0 Discussions</p>
-   </div><!--/col-md-3-->
-   </div><!--/row-->
-    <br>
-   <div class="row">
-  <div class="col-md-1">
-  <img src="images/default_category.png" class="img-responsive" alt="jokes" style="background:#fbfbfb none repeat scroll 0 0;border:1px solid #dfdfdf;border-radius:50%;">
-  
-  </div><!--/col-md-11-->
-  <div class="col-md-6">
-   <a href="#"><h4>Events,Hotels & Night Clubs</h4></a>
-   <p>0 Discussions</p>
-   </div><!--/col-md-3-->
-   </div><!--/row-->
-   <br>
-   <div class="row">
-  <div class="col-md-1">
-  <img src="images/default_category.png" class="img-responsive" alt="jokes" style="background:#fbfbfb none repeat scroll 0 0;border:1px solid #dfdfdf;border-radius:50%;">
-  
-  </div><!--/col-md-11-->
-  <div class="col-md-6">
-   <a href="#"><h4>Development & Technology in Africa</h4></a>
-   <p>1 Discussions</p>
-   </div><!--/col-md-3-->
-   </div><!--/row-->
-   
+	@endforeach
    
   </div><!--panel-body-->
  
   
  
 </div>
-            <div class="row">
-              <div class="col-lg-12 col-sm-12">
-                <section class="panel">
-                  <div class="panel-body">
-                    <div class="clearfix m-b"> <small class="text-muted pull-right">5m ago</small> <a class="thumb-sm pull-left m-r" href="#"> <img class="img-circle" src="images/avatar.jpg"> </a>
-                      <div class="clear"> <a href="#"><strong>Jonathan Omish</strong></a> <small class="block text-muted">San Francisco, USA</small> </div>
-                    </div>
-                    <p>PnAfrik PnAfrik PnAfrik PnAfrik...</p>
-                    <small class=""><a href="#"><i class="fa fa-thumbs-o-up"></i>Likes (25)</a> &nbsp;&nbsp;&nbsp;<a href="#"><i class="fa fa-comment-o"></i> Comments (25)</a> </small> </div>
-
-                  <footer class="panel-footer pos-rlt"> <span class="arrow top"></span>
-                    <form class="pull-out">
-                      <input type="text" placeholder="Write a comment..." class="form-control no-border input-lg text-sm">
-                    </form>
-                  </footer>
-                </section>
-              </div>
-              <!--<div class="col-lg-6 col-sm-6">
-                <section class="panel">
-                  <div class="panel-body">
-                    <div class="clearfix m-b"> <small class="text-muted pull-right">1hr ago</small> <a href="#" class="thumb-sm pull-left m-r"> <img src="images/avatar_default.jpg" class="img-circle"> </a>
-                      <div class="clear"> <a href="#"><strong>Mike Mcalidek</strong></a> <small class="block text-muted">Newyork, USA</small> </div>
-                    </div>
-                    <div class="pull-in bg-light clearfix m-b-n">
-                      <p class="m-t-sm m-b text-center animated bounceInDown"> <i class="fa fa-map-marker text-danger fa fa-4x" data-toggle="tooltip" title="checked in at Newyork"></i> </p>
-                    </div>
-                  </div>
-                  <footer class="panel-footer pos-rlt"> <span class="arrow top"></span>
-                    <form class="pull-out">
-                      <input type="text" class="form-control no-border input-lg text-sm" placeholder="Write a comment...">
-                    </form>
-                  </footer>
-                </section>
-              </div> -->
-            </div>
-            <div class="row">
-              <div class="col-lg-12 col-sm-12">
-                <section class="panel">
-                  <div class="panel-body">
-                    <div class="clearfix m-b"> <small class="text-muted pull-right">5m ago</small> <a class="thumb-sm pull-left m-r" href="#"> <img class="img-circle" src="images/avatar.jpg"> </a>
-                      <div class="clear"> <a href="#"><strong>Jonathan Omish</strong></a> <small class="block text-muted">San Francisco, USA</small> </div>
-                    </div>
-                    <p><img width="200" height="150" alt="img" src="images/thumb_1.jpg"></p>
-                    <small class=""><a href="#"><i class="fa fa-thumbs-o-up"></i>Likes (25)</a> &nbsp;&nbsp;&nbsp;<a href="#"><i class="fa fa-comment-o"></i> Comments (25)</a> </small> </div>
-                  <footer class="panel-footer pos-rlt"> <span class="arrow top"></span>
-                    <form class="pull-out">
-                      <input type="text" placeholder="Write a comment..." class="form-control no-border input-lg text-sm">
-                    </form>
-                  </footer>
-                </section>
-              </div>
-              <!--<div class="col-lg-6 col-sm-6">
-                <section class="panel">
-                  <div class="panel-body">
-                    <div class="clearfix m-b"> <small class="text-muted pull-right">1hr ago</small> <a href="#" class="thumb-sm pull-left m-r"> <img src="images/avatar_default.jpg" class="img-circle"> </a>
-                      <div class="clear"> <a href="#"><strong>Mike Mcalidek</strong></a> <small class="block text-muted">Newyork, USA</small> </div>
-                    </div>
-                    <div class="pull-in bg-light clearfix m-b-n">
-                      <p class="m-t-sm m-b text-center animated bounceInDown"> <i class="fa fa-map-marker text-danger fa fa-4x" data-toggle="tooltip" title="checked in at Newyork"></i> </p>
-                    </div>
-                  </div>
-                  <footer class="panel-footer pos-rlt"> <span class="arrow top"></span>
-                    <form class="pull-out">
-                      <input type="text" class="form-control no-border input-lg text-sm" placeholder="Write a comment...">
-                    </form>
-                  </footer>
-                </section>
-              </div> -->
-            </div>
-            <div class="row">
-              <div class="col-lg-12 col-sm-12">
-                <section class="panel">
-                  <div class="panel-body">
-                    <div class="clearfix m-b"> <small class="text-muted pull-right">5m ago</small> <a class="thumb-sm pull-left m-r" href="#"> <img class="img-circle" src="images/avatar.jpg"> </a>
-                      <div class="clear"> <a href="#"><strong>Jonathan Omish</strong></a> <small class="block text-muted">San Francisco, USA</small> </div>
-                    </div>
-                    <p>PnAfrik PnAfrik PnAfrik PnAfrik...</p>
-                    <small class=""><a href="#"><i class="fa fa-thumbs-o-up"></i>Likes (25)</a> &nbsp;&nbsp;&nbsp;<a href="#"><i class="fa fa-comment-o"></i> Comments (25)</a> </small> </div>
-                  <footer class="panel-footer pos-rlt"> <span class="arrow top"></span>
-                    <form class="pull-out">
-                      <input type="text" placeholder="Write a comment..." class="form-control no-border input-lg text-sm">
-                    </form>
-                  </footer>
-                </section>
-              </div>
-              <!--<div class="col-lg-6 col-sm-6">
-                <section class="panel">
-                  <div class="panel-body">
-                    <div class="clearfix m-b"> <small class="text-muted pull-right">1hr ago</small> <a href="#" class="thumb-sm pull-left m-r"> <img src="images/avatar_default.jpg" class="img-circle"> </a>
-                      <div class="clear"> <a href="#"><strong>Mike Mcalidek</strong></a> <small class="block text-muted">Newyork, USA</small> </div>
-                    </div>
-                    <div class="pull-in bg-light clearfix m-b-n">
-                      <p class="m-t-sm m-b text-center animated bounceInDown"> <i class="fa fa-map-marker text-danger fa fa-4x" data-toggle="tooltip" title="checked in at Newyork"></i> </p>
-                    </div>
-                  </div>
-                  <footer class="panel-footer pos-rlt"> <span class="arrow top"></span>
-                    <form class="pull-out">
-                      <input type="text" class="form-control no-border input-lg text-sm" placeholder="Write a comment...">
-                    </form>
-                  </footer>
-                </section>
-              </div> -->
-            </div>
-            <div class="row">
-              <div class="col-lg-12 col-sm-12">
-                <section class="panel">
-                  <div class="panel-body">
-                    <div class="clearfix m-b"> <small class="text-muted pull-right">5m ago</small> <a class="thumb-sm pull-left m-r" href="#"> <img class="img-circle" src="images/avatar.jpg"> </a>
-                      <div class="clear"> <a href="#"><strong>Jonathan Omish</strong></a> <small class="block text-muted">San Francisco, USA</small> </div>
-                    </div>
-                    <p>PnAfrik PnAfrik PnAfrik PnAfrik...</p>
-                    <small class=""><a href="#"><i class="fa fa-thumbs-o-up"></i>Likes (25)</a> &nbsp;&nbsp;&nbsp;<a href="#"><i class="fa fa-comment-o"></i> Comments (25)</a> </small> </div>
-                  <footer class="panel-footer pos-rlt"> <span class="arrow top"></span>
-                    <form class="pull-out">
-                      <input type="text" placeholder="Write a comment..." class="form-control no-border input-lg text-sm">
-                    </form>
-                  </footer>
-                </section>
-              </div>
-              <!--<div class="col-lg-6 col-sm-6">
-                <section class="panel">
-                  <div class="panel-body">
-                    <div class="clearfix m-b"> <small class="text-muted pull-right">1hr ago</small> <a href="#" class="thumb-sm pull-left m-r"> <img src="images/avatar_default.jpg" class="img-circle"> </a>
-                      <div class="clear"> <a href="#"><strong>Mike Mcalidek</strong></a> <small class="block text-muted">Newyork, USA</small> </div>
-                    </div>
-                    <div class="pull-in bg-light clearfix m-b-n">
-                      <p class="m-t-sm m-b text-center animated bounceInDown"> <i class="fa fa-map-marker text-danger fa fa-4x" data-toggle="tooltip" title="checked in at Newyork"></i> </p>
-                    </div>
-                  </div>
-                  <footer class="panel-footer pos-rlt"> <span class="arrow top"></span>
-                    <form class="pull-out">
-                      <input type="text" class="form-control no-border input-lg text-sm" placeholder="Write a comment...">
-                    </form>
-                  </footer>
-                </section>
-              </div> -->
-            </div>
+            
             <div class="text-center m-b"> <i class="fa fa-spinner fa fa-spin"></i> </div>
           </div>
           <div class="col-lg-4">
@@ -366,4 +158,33 @@
           </div>
         </div>
       </section>
+	  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+	  <script type="text/javascript">
+	  
+	  $(document).ready(function(){
+		  
+		    $.ajaxSetup({
+				headers: {
+					'X-CSRF-TOKEN':'{{csrf_token()}}'
+				}
+			});
+			
+			//alert('hi');
+		    ////////////////////imp code//////////////////
+			/*$.post( "<?php echo url();?>/thread/"+'3/somealias', { title: "mypost",content: "this is my first post" }, function( data ) {
+			  console.log( data ); // John
+			  alert(data);
+			}, "json");*/
+			
+			////////////////////imp code end//////////////////
+			
+			$('#saysomehing').click(function (){
+				
+				window.location = '<?php echo url();?>/createthread/1/somea';
+				
+			});
+		  
+	  });
+	  
+	  </script>
 	   @stop
